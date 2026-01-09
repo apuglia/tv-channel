@@ -2,16 +2,19 @@ import { NextRequest, NextResponse } from "next/server";
 
 const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
 
-// Key Venezuelan political accounts to monitor
+// Key accounts to monitor - Venezuela politics + market news
 const ACCOUNTS_TO_MONITOR = [
-  "NicolasMaduro",
-  "jaborealismo",
-  "MariaCorinaMachado",
-  "EdmundGonzalez",
-  "GobsucreVE",
-  "ABOREAL",
-  "AlertaVzla",
-  "LuisaOrtegaDiaz",
+  "williamserafino",
+  "LuisOlavarrieta",
+  "ElPitazoTV",
+  "DeItaone",
+  "unusual_whales",
+  "WhiteHouse",
+  "marcorubio",
+  "Polymarket",
+  "INDIURBANEJA",
+  "yvangil",
+  "Mibelis",
 ];
 
 // Hashtags to track

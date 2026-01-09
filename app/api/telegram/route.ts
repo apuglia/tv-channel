@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHANNELS = process.env.TELEGRAM_CHANNELS?.split(",") || [];
+
+// Default channels to monitor - can be overridden with TELEGRAM_CHANNELS env var
+const DEFAULT_CHANNELS = ["DrodriguezVen"];
+const TELEGRAM_CHANNELS = process.env.TELEGRAM_CHANNELS?.split(",") || DEFAULT_CHANNELS;
 
 interface TelegramMessage {
   id: string;

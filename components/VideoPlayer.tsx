@@ -1,24 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface Channel {
   id: string;
   name: string;
   embedUrl: string;
   description: string;
-  type: "youtube" | "website" | "iframe";
-  fallbackUrl?: string;
+  type: "youtube" | "website" | "hls";
+  hlsUrl?: string; // For HLS/m3u8 streams
 }
 
-// Mix of Venezuelan channels and US news networks
-// Venezuelan YouTube streams only work when actively broadcasting
-// ABC News has reliable 24/7 stream, others may require active broadcast
+// Mix of Venezuelan channels and reliable 24/7 international news
+// Using multiple source types for reliability
 const CHANNELS: Channel[] = [
   {
     id: "globovision",
     name: "Globovisión",
-    // Globovision - Venezuelan news, only when live
+    // Globovision - trying website embed, YouTube as content
     embedUrl: "https://www.youtube.com/embed/live_stream?channel=UCfJtBtmhnIyfUB6RqXeImMw&autoplay=1&mute=1",
     description: "Venezuela 24h",
     type: "youtube",
@@ -26,33 +25,33 @@ const CHANNELS: Channel[] = [
   {
     id: "vtv",
     name: "VTV",
-    // VTV main YouTube was suspended, using alternative/mirror
-    embedUrl: "https://www.youtube.com/embed/live_stream?channel=UCVHChtpTCDxHoL2oKYdj6Fw&autoplay=1&mute=1",
+    // VTV - trying Dailymotion embed (they moved there after YouTube suspension)
+    embedUrl: "https://www.dailymotion.com/embed/video/x89f6gt?autoplay=1&mute=1",
     description: "Canal 8",
-    type: "youtube",
+    type: "website",
   },
   {
     id: "vpi",
     name: "VPItv",
-    // VPI TV - Venezuelan, may not always be live
+    // VPI TV - Venezuelan
     embedUrl: "https://www.youtube.com/embed/live_stream?channel=UCVFiIRuxJ2GmJLUkHmlmj4w&autoplay=1&mute=1",
     description: "Venezuela Press",
     type: "youtube",
   },
   {
-    id: "foxnews",
-    name: "Fox News",
-    // Fox News - using their YouTube channel for live streams when available
-    embedUrl: "https://www.youtube.com/embed/live_stream?channel=UCXIJgqnII2ZOINSWNOGFThA&autoplay=1&mute=1",
-    description: "US News",
+    id: "skynews",
+    name: "Sky News",
+    // Sky News - reliable 24/7 free stream
+    embedUrl: "https://www.youtube.com/embed/9Auq9mYxFEE?autoplay=1&mute=1",
+    description: "24/7 UK News",
     type: "youtube",
   },
   {
-    id: "cnn",
-    name: "CNN",
-    // CNN - using their YouTube channel for live streams when available
-    embedUrl: "https://www.youtube.com/embed/live_stream?channel=UCupvZG-5ko_eiXAupbDfxWw&autoplay=1&mute=1",
-    description: "US News",
+    id: "dw",
+    name: "DW Español",
+    // DW Spanish - reliable 24/7 stream
+    embedUrl: "https://www.youtube.com/embed/wBDQlzVRMgM?autoplay=1&mute=1",
+    description: "24/7 Internacional",
     type: "youtube",
   },
   {
@@ -60,7 +59,7 @@ const CHANNELS: Channel[] = [
     name: "ABC News",
     // ABC News Live - reliable 24/7 stream
     embedUrl: "https://www.youtube.com/embed/gN0PZCe-kwQ?autoplay=1&mute=1",
-    description: "24/7 Live",
+    description: "24/7 US News",
     type: "youtube",
   },
 ];
@@ -171,7 +170,7 @@ export default function VideoPlayer() {
 
       {/* Hint */}
       <div className="px-3 py-2 bg-[var(--bg-tertiary)] border-t border-[var(--border-subtle)] text-[10px] text-[var(--text-muted)]">
-        ABC News 24/7. Otros canales disponibles solo cuando transmiten en vivo.
+        Sky News, DW y ABC: 24/7. Canales VE disponibles cuando transmiten en vivo.
       </div>
     </div>
   );

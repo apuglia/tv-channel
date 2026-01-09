@@ -117,12 +117,12 @@ export default function VideoPlayer() {
         <span className="time-badge">{CHANNELS.length} canales</span>
       </div>
 
-      {/* 3x2 Grid */}
-      <div className="flex-1 grid grid-cols-3 grid-rows-2 gap-px bg-[var(--border-subtle)] min-h-0">
+      {/* Responsive Grid: 2 cols on mobile, 3 cols on desktop */}
+      <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 grid-rows-3 lg:grid-rows-2 gap-px bg-[var(--border-subtle)] min-h-0 overflow-auto">
         {CHANNELS.map((channel) => (
           <div
             key={channel.id}
-            className="relative bg-black group cursor-pointer"
+            className="relative bg-black group cursor-pointer min-h-[120px] lg:min-h-0"
             onClick={() => setFocusedChannel(channel.id)}
           >
             {/* Video iframe */}

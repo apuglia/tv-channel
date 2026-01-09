@@ -84,20 +84,20 @@ export default function AlertBanner() {
   }
 
   return (
-    <div className={`alert-banner ${currentAlert.type} animate-slide-in`}>
+    <div className={`alert-banner ${currentAlert.type} animate-slide-in text-xs lg:text-sm`}>
       {/* Label */}
-      <span className={`alert-label ${currentAlert.type}`}>
+      <span className={`alert-label ${currentAlert.type} text-[8px] lg:text-[10px]`}>
         {currentAlert.type === "breaking" ? "Última Hora" : "Tendencia"}
       </span>
 
-      {/* Divider */}
-      <div className="w-px h-4 bg-[var(--border-primary)]" />
+      {/* Divider - hidden on mobile */}
+      <div className="hidden lg:block w-px h-4 bg-[var(--border-primary)]" />
 
       {/* Content */}
-      <p className="flex-1 truncate">{currentAlert.text}</p>
+      <p className="flex-1 truncate text-[11px] lg:text-[13px]">{currentAlert.text}</p>
 
-      {/* Source */}
-      <span className="text-xs text-[var(--text-muted)] whitespace-nowrap">
+      {/* Source - hidden on very small screens */}
+      <span className="hidden sm:inline text-[10px] lg:text-xs text-[var(--text-muted)] whitespace-nowrap">
         {currentAlert.source}
       </span>
     </div>

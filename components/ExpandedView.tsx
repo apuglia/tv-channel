@@ -102,7 +102,7 @@ export default function ExpandedView({ item, onClose }: ExpandedViewProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-8"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 lg:p-8"
       onClick={onClose}
     >
       {/* Backdrop */}
@@ -110,7 +110,7 @@ export default function ExpandedView({ item, onClose }: ExpandedViewProps) {
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-4xl max-h-[80vh] bg-[var(--bg-secondary)] border border-[var(--border-primary)] rounded-lg overflow-hidden flex flex-col"
+        className="relative w-full max-w-4xl max-h-[90vh] lg:max-h-[80vh] bg-[var(--bg-secondary)] border border-[var(--border-primary)] rounded-lg overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -137,10 +137,10 @@ export default function ExpandedView({ item, onClose }: ExpandedViewProps) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-auto p-6">
-          <div className="flex gap-8">
+        <div className="flex-1 overflow-auto p-4 lg:p-6">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
             {/* Main content */}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               {/* Author (for tweets) */}
               {item.author && (
                 <div className="flex items-center gap-3 mb-4">
@@ -156,19 +156,19 @@ export default function ExpandedView({ item, onClose }: ExpandedViewProps) {
 
               {/* Title (for news) */}
               {item.title && (
-                <h2 className="text-2xl font-semibold text-[var(--text-primary)] mb-4 leading-tight">
+                <h2 className="text-xl lg:text-2xl font-semibold text-[var(--text-primary)] mb-4 leading-tight">
                   {item.title}
                 </h2>
               )}
 
               {/* Text content */}
-              <p className="text-lg text-[var(--text-primary)] leading-relaxed whitespace-pre-wrap">
+              <p className="text-base lg:text-lg text-[var(--text-primary)] leading-relaxed whitespace-pre-wrap">
                 {item.text}
               </p>
 
               {/* Metrics (for tweets) */}
               {item.metrics && (
-                <div className="flex gap-6 mt-6 pt-4 border-t border-[var(--border-subtle)]">
+                <div className="flex flex-wrap gap-4 lg:gap-6 mt-6 pt-4 border-t border-[var(--border-subtle)]">
                   <div className="flex items-center gap-2 text-[var(--text-muted)]">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -196,9 +196,9 @@ export default function ExpandedView({ item, onClose }: ExpandedViewProps) {
               </div>
             </div>
 
-            {/* QR Code sidebar */}
+            {/* QR Code sidebar - hidden on mobile (they're already on mobile) */}
             {itemUrl && (
-              <div className="flex-shrink-0 flex flex-col items-center gap-4 p-4 bg-[var(--bg-tertiary)] rounded-lg">
+              <div className="hidden lg:flex flex-shrink-0 flex-col items-center gap-4 p-4 bg-[var(--bg-tertiary)] rounded-lg">
                 <QRCode url={itemUrl} size={150} />
                 <div className="text-center">
                   <div className="text-xs text-[var(--text-secondary)] mb-1">Abrir en móvil</div>
@@ -212,9 +212,12 @@ export default function ExpandedView({ item, onClose }: ExpandedViewProps) {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-4 border-t border-[var(--border-subtle)] bg-[var(--bg-tertiary)]">
-          <span className="text-xs text-[var(--text-muted)]">
+        <div className="flex items-center justify-between p-3 lg:p-4 border-t border-[var(--border-subtle)] bg-[var(--bg-tertiary)]">
+          <span className="text-[10px] lg:text-xs text-[var(--text-muted)] hidden lg:inline">
             Presiona ESC o haz clic afuera para cerrar
+          </span>
+          <span className="text-[10px] text-[var(--text-muted)] lg:hidden">
+            Toca afuera para cerrar
           </span>
           {itemUrl && (
             <a

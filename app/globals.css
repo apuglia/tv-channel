@@ -44,6 +44,14 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Mobile optimizations */
+@media (max-width: 1023px) {
+  html, body {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* Refined scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -300,10 +308,17 @@ html, body {
 .alert-banner {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
+  gap: 8px;
+  padding: 8px 12px;
   font-size: 13px;
   font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+  .alert-banner {
+    gap: 12px;
+    padding: 10px 16px;
+  }
 }
 
 .alert-banner.breaking {

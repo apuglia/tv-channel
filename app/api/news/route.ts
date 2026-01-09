@@ -3,10 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 // RSS feeds from Venezuelan news sources
 const RSS_FEEDS = [
   {
-    name: "El Nacional",
-    url: "https://www.elnacional.com/feed/",
-  },
-  {
     name: "Efecto Cocuyo",
     url: "https://efectococuyo.com/feed/",
   },
@@ -15,8 +11,8 @@ const RSS_FEEDS = [
     url: "https://runrun.es/feed/",
   },
   {
-    name: "Monitoreamos",
-    url: "https://monitoreamos.com/feed/",
+    name: "El Nacional",
+    url: "https://www.elnacional.com/feed/",
   },
   {
     name: "La Patilla",
